@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "1a0f97f0-bf26-4636-b84e-0017d42b6f2c",
+		"name": "Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29359833"
+	},
+	"item": [
+		{
+			"name": "Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ns}}/booking/{{id}}",
+					"host": [
+						"{{ns}}"
+					],
+					"path": [
+						"booking",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customerinfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jesonDta = pm.response.json()\r",
+							"pm.environment.set(\"id\", jesonDta.bookingid)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"Nafisa\",\r\n    \"lastname\": \"Swarna\",\r\n    \"totalprice\": 159,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2018-01-01\",\r\n        \"checkout\": \"2019-01-01\"\r\n    },\r\n    \"additionalneeds\": \"Breakfast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ns}}/booking",
+					"host": [
+						"{{ns}}"
+					],
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatev1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "token={{Accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"Nafisa\",\r\n    \"lastname\": \"Mansura\",\r\n    \"totalprice\": 159,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2018-01-01\",\r\n        \"checkout\": \"2019-01-01\"\r\n    },\r\n    \"additionalneeds\": \"Breakfast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ns}}/booking/{{id}}",
+					"host": [
+						"{{ns}}"
+					],
+					"path": [
+						"booking",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var token1 = pm.response.json()\r",
+							"pm.environment.set(\"Accesstoken\",token1.token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ns}}/auth",
+					"host": [
+						"{{ns}}"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "token={{Accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"Mansuraa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ns}}/booking/{{id}}",
+					"host": [
+						"{{ns}}"
+					],
+					"path": [
+						"booking",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
